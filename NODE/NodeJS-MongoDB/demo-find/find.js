@@ -9,6 +9,7 @@ MongoClient.connect(url, (err, db) => { //DB'e bağlanacağız. hangisine olduğ
     const dbo = db.db("mydb"); //mydb'i açıyoruz.
     //findOne'in ilk parametresi bir sorgu objesi. Eğer boş olursa ilk kaydı dönüyor ama tüm kaydı seçiyor.
     dbo.collection("customers").findOne({}, (err, result) => {
+        //mongoose ile birlikte findById(req.params.id)   diyebiliyoruz. yapılan istekteki id'i alıp arama yapıyor.
         if (err) throw err;
         console.log(result.name); //ilk kaydı döndü => Company Inc.
         db.close();
