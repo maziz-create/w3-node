@@ -35,3 +35,15 @@ MongoClient.connect(url, (err, db) => {
 // n => silinen kayıt sayısını veriyor. kullanılabilir.
 //console.log(obj.result.n)
 
+//-------
+
+//Mongoose ile belli bir id'e sahip kaydı bulmasını ve gönderilen HTTP isteği içerisinde yer alan field'ların güncellenmesini istiyorsak:
+
+server.del('/customers/:id', async (req, res, next) => {
+    const customer = await Customer.findOneAndRemove({ _id: req.params.id });
+//..
+    res.send(204); //iş tamam, kayıt silindi.
+    next(); //sonraki route'a geçmesi için.
+//...
+})
+
