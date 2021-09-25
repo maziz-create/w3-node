@@ -36,6 +36,17 @@ MongoClient.connect(url, (err, db) => {
 
 //-----
 
+//Mongoose ile belli bir id'e sahip kaydı bulmasını ve gönderilen HTTP isteği içerisinde yer alan field'ların güncellenmesini istiyorsak:
+
+server.put('/customers/:id', async (req, res, next) => {
+//...
+    const customer = await Customer.findOneAndUpdate(
+        { _id: req.params.id }, //ilk parametre: recordların hangi field ile aranacağı.
+        req.body, //ikinci parametre: değiştirilecek her ne varsa.. tabi field isimleri uyuşmalı.
+        );
+//...
+    });
+
 
 // updateOne() ve updateMany() kullanıldığı zaman result objesi dönüyor. 
 // içinde nModified alanı var, kaç adet kaydın update edildiğini gösteriyor.
